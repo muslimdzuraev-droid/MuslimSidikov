@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Абдыкерим Сыдыков — историческая книга</title>
+
+<style>
+:root {
+  --paper: #ead9b5;
+  --ink: #392719;
+  --brown: #704c2e;
+  --gold: #a98248;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px 12px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  background: radial-gradient(ellipse at top, #80684b, #30241b 85%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  color: #f4e4c2;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+header h1 {
+  font-size: clamp(22px, 4vw, 34px);
+  margin: 0 0 8px;
+}
+
+header p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.book {
+  width: min(920px, 100%);
+}
+
+.page {
+  min-height: 620px;
+  position: relative;
+  padding: clamp(25px, 5vw, 48px);
+  border: 8px double #9a784a;
+  border-radius: 4px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 10% 10%, #fff4d4aa, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, #a9844a22, transparent 45%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      #8e6b4010 29px
+    ),
+    var(--paper);
+  box-shadow: 0 15px 35px #0008, inset 0 0 35px #8e673b38;
+  animation: appear .3s ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: .35;
+    transform: rotateY(-4deg) translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0) translateX(0);
+  }
+}
+
+.page::before {
+  content: "❧";
+  position: absolute;
+  top: 8px;
+  left: 15px;
+  color: #9b7748;
+  font-size: 27px;
+}
+
+.page::after {
+  content: "❧";
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+  color: #9b7748;
+  font-size: 27px;
+}
+
+.cover {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--brown);
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: clamp(29px, 5vw, 45px);
+  line-height: 1.15;
+  color: #4b301b;
+  margin: 8px 0 15px;
+}
+
+h3 {
+  font-size: clamp(22px, 3vw, 30px);
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #a7885c;
+}
+
+p, li {
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.7;
+}
+
+p {
+  margin: 12px 0;
+}
+
+ul {
+  padding-left: 24px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.ornament {
+  color: var(--gold);
+  font-size: 28px;
+  letter-spacing: 7px;
+  margin: 8px 0;
+}
+
+.portrait {
+  display: block;
+  width: min(340px, 100%);
+  max-height: 330px;
+  object-fit: contain;
+  margin: 18px auto;
+  border: 5px double #967144;
+  padding: 6px;
+  background: #f5e8cb;
+  box-shadow: 0 5px 14px #563b2030;
+}
+
+.portrait.wide {
+  width: min(100%, 600px);
+  max-height: 350px;
+}
+
+.caption {
+  font-size: 13px;
+  text-align: center;
+  font-style: italic;
+  opacity: .85;
+  margin: 8px auto 15px;
+  line-height: 1.5;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 20px;
+  text-align: center;
+  padding: 15px;
+  margin: 20px 0;
+  border-top: 1px solid #a7885c;
+  border-bottom: 1px solid #a7885c;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.columns img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border: 3px solid #b49a70;
+  background: #f5e8cb;
+  padding: 4px;
+}
+
+.info-box {
+  background: #a9844a18;
+  border-left: 4px solid #9b7748;
+  padding: 12px 17px;
+  margin: 17px 0;
+}
+
+.page-number {
+  text-align: center;
+  font-size: 13px;
+  color: #795a37;
+  margin-top: 25px;
+}
+
+.controls {
+  width: min(920px, 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 17px;
+  color: #f4e4c2;
+}
+
+button {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  color: #f8ebd1;
+  background: #6e4b2e;
+  border: 1px solid #c1a06c;
+  padding: 12px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #91683c;
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+#counter {
+  text-align: center;
+  font-size: 14px;
+}
+
+footer {
+  color: #e5d1ad;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+  opacity: .8;
+}
+
+@media (max-width: 600px) {
+  .page {
+    min-height: 650px;
+    padding: 30px 20px;
+    border-width: 5px;
+  }
+
+  .cover {
+    min-height: 650px;
+  }
+
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .columns img {
+    max-height: 220px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    padding: 11px 13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Исторические страницы</h1>
+  <p>Жизнь и деятельность Абдыкерима Сыдыкова</p>
+</header>
+
+<main class="book">
+  <section class="page cover" id="page"></section>
+</main>
+
+<nav class="controls" aria-label="Навигация">
+  <button id="prev" onclick="changePage(-1)">← Назад</button>
+  <span id="counter">Страница 1 из 8</span>
+  <button id="next" onclick="changePage(1)">Далее →</button>
+</nav>
+
+<footer>
+  История Кыргызстана · Биографическая презентация
+</footer>
+
+<script>
+/*
+  Фотографии загружаются из интернета.
+  Если источник недоступен, используется запасной портрет на марке.
+*/
+
+const stampPortrait =
+  "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_of_Abdykerim_Sydykov_on_the_stamp_of_Kyrgyzstan_(2014).jpg";
+
+const portrait1917 =
+  "https://picryl.com/amp/media/portrait-of-abdykerim-sydykov-1-fc4b08";
+
+const portrait1920 =
+  "https://picryl.com/amp/media/portrait-of-abdykerim-sydykov-2-cd932c";
+
+const groupPhoto =
+  "https://upload.wikimedia.org/wikipedia/commons/c/c8/%D0%90%D0%B1%D0%B4%D1%8B%D0%BA%D0%B5%D1%80%D0%B8%D0%BC_%D0%A1%D1%8B%D0%B4%D1%8B%D0%BA%D0%BE%D0%B2%2C_%D0%A2%D1%83%D1%80%D0%B4%D0%B0%D0%BB%D1%8B_%D0%A2%D0%BE%D0%BA%D0%B1%D0%B0%D0%B5%D0%B2%2C_%D0%98%D1%88%D0%B5%D0%BD%D0%B0%D0%BB%D1%8B_%D0%90%D1%80%D0%B0%D0%B1%D0%B0%D0%B5%D0%B2.jpg";
+
+function photo(url, alt, extraClass = "") {
+  return `
+    <img class="portrait ${extraClass}"
+      src="${url}"
+      alt="${alt}"
+      loading="lazy"
+      onerror="if(this.dataset.fallback!=='yes'){
+        this.dataset.fallback='yes';
+        this.src='${stampPortrait}';
+      }else{
+        this.style.display='none';
+      }">
+  `;
+}
+
+const pages = [
+
+{
+  cover: true,
+  html: `
+    <div class="kicker">История Кыргызстана</div>
+    <div class="ornament">✦ ❧ ✦</div>
+    <h2>Абдыкерим<br>Сыдыков</h2>
+    <p><strong>1889–1938</strong></p>
+    ${photo(portrait1920, "Портрет Абдыкерима Сыдыкова")}
+    <div class="caption">
+      Архивный портрет. Если изображение недоступно, появится портрет на почтовой марке.
+    </div>
+    <div class="ornament">❧</div>
+    <p>Один из деятелей становления кыргызской государственности</p>
+  `
+},
+
+{
+  title: "1. Детство и образование",
+  html: `
+    <div class="kicker">Глава первая</div>
+    <h3>Детство и образование</h3>
+    <div class="columns">
+      <div>
+        <p>Абдыкерим Сыдыков родился в 1889 году на территории современного Кыргызстана.</p>
+        <p>Он жил в период больших перемен в жизни кыргызского народа. Образование постепенно становилось важным условием участия в общественной жизни.</p>
+        <p>Полученные знания помогли ему включиться в общественную и политическую деятельность.</p>
+      </div>
+      <div>
+        ${photo(portrait1917, "Архивный портрет Абдыкерима Сыдыкова")}
+        <div class="caption">Архивный портрет, приписываемый 1917 году</div>
+      </div>
+    </div>
+    <div class="info-box">
+      Конец XIX — начало XX века стали временем значительных общественных и политических изменений в Центральной Азии.
+    </div>
+  `
+},
+
+{
+  title: "2. Общественная деятельность",
+  html: `
+    <div class="kicker">Глава вторая</div>
+    <h3>Общественная деятельность</h3>
+    ${photo(portrait1920, "Портрет Абдыкерима Сыдыкова")}
+    <div class="caption">Портрет из исторической коллекции</div>
+    <p>Абдыкерим Сыдыков вошёл в число кыргызских общественных и политических деятелей начала XX века.</p>
+    <ul>
+      <li>Участвовал в обсуждении будущего кыргызского народа.</li>
+      <li>Занимался общественными и политическими вопросами.</li>
+      <li>Интересовался устройством управления и развитием региона.</li>
+    </ul>
+  `
+},
+
+{
+  title: "3. Идея государственности",
+  html: `
+    <div class="kicker">Глава третья</div>
+    <h3>Идея кыргызской государственности</h3>
+    <div class="columns">
+      <div>
+        <p>В начале XX века важным вопросом было национальное самоопределение кыргызского народа.</p>
+        <p>Общественные деятели обсуждали создание собственной административно-территориальной единицы и представительство местного населения.</p>
+        <p>Сыдыков участвовал в процессах, связанных с формированием кыргызской автономии.</p>
+      </div>
+      <div>
+        ${photo(portrait1917, "Архивный портрет Абдыкерима Сыдыкова")}
+        <div class="caption">Исторический портрет</div>
+      </div>
+    </div>
+    <div class="info-box">
+      Формирование государственности было длительным процессом, на который влияли разные политические силы и исторические обстоятельства.
+    </div>
+  `
+},
+
+{
+  title: "4. Образование автономии",
+  html: `
+    <div class="kicker">Глава четвёртая</div>
+    <h3>Образование автономии</h3>
+    ${photo(groupPhoto, "Абдыкерим Сыдыков, Турдалы Токбаев и Ишеналы Арабаев", "wide")}
+    <div class="caption">
+      Групповая фотография, которую связывают с Абдыкеримом Сыдыковым, Турдалы Токбаевым и Ишеналы Арабаевым.
+    </div>
+    <p><strong>14 октября 1924 года</strong> была образована Кара-Кыргызская автономная область в составе РСФСР.</p>
+    <p>Это стало важным этапом в формировании современной кыргызской государственности.</p>
+    <ul>
+      <li>Началось оформление отдельной административной единицы.</li>
+      <li>Создавались органы управления.</li>
+      <li>Менялась система представительства населения.</li>
+    </ul>
+  `
+},
+
+{
+  title: "5. Историческое значение",
+  html: `
+    <div class="kicker">Глава пятая</div>
+    <h3>Историческое значение</h3>
+    <div class="columns">
+      <div>
+        <p>Абдыкерим Сыдыков занимает место в истории Кыргызстана как общественный и политический деятель начала XX века.</p>
+        <p>Его биография помогает понять стремления кыргызских деятелей того времени и сложность исторических процессов.</p>
+      </div>
+      <div>
+        ${photo(portrait1920, "Портрет Абдыкерима Сыдыкова")}
+        <div class="caption">Архивный портрет</div>
+      </div>
+    </div>
+    <div class="quote">
+      История государственности складывается из решений людей и событий целой эпохи.
+    </div>
+    <p>Изучение таких биографий помогает глубже понимать прошлое Кыргызстана.</p>
+  `
+},
+
+{
+  title: "6. Последние годы",
+  html: `
+    <div class="kicker">Глава шестая</div>
+    <h3>Последние годы жизни</h3>
+    ${photo(stampPortrait, "Портрет Абдыкерима Сыдыкова на почтовой марке Кыргызстана")}
+    <div class="caption">Почтовая марка Кыргызстана, 2014 год</div>
+    <p>В 1930-е годы в Советском Союзе проходили политические репрессии, затронувшие многих государственных и общественных деятелей.</p>
+    <p>Абдыкерим Сыдыков был репрессирован и погиб в 1938 году.</p>
+    <div class="quote">
+      Сохранение исторической памяти помогает осмыслить сложные страницы прошлого.
+    </div>
+  `
+},
+
+{
+  title: "7. Итоги",
+  html: `
+    <div class="kicker">Заключительная глава</div>
+    <h3>Итоги</h3>
+    <p>Абдыкерим Сыдыков — один из деятелей, связанных с формированием кыргызской государственности.</p>
+    <ul>
+      <li>Жил в период больших исторических перемен.</li>
+      <li>Участвовал в общественной и политической жизни.</li>
+      <li>Был связан с процессом образования кыргызской автономии.</li>
+      <li>Стал жертвой политических репрессий 1930-х годов.</li>
+    </ul>
+    <div class="ornament">✦ ❧ ✦</div>
+    <h2 style="text-align:center;font-size:30px">
+      Спасибо за внимание!
+    </h2>
+    <p style="text-align:center">
+      История сохраняется в документах, фотографиях и памяти людей.
+    </p>
+  `
+}
+
+];
+
+let currentPage = 0;
+
+function renderPage() {
+  const page = document.getElementById("page");
+  const data = pages[currentPage];
+
+  page.className = "page" + (data.cover ? " cover" : "");
+  page.innerHTML = data.html;
+
+  document.getElementById("counter").textContent =
+    `Страница ${currentPage + 1} из ${pages.length}`;
+
+  document.getElementById("prev").disabled = currentPage === 0;
+  document.getElementById("next").disabled =
+    currentPage === pages.length - 1;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function changePage(direction) {
+  const nextPage = currentPage + direction;
+
+  if (nextPage < 0 || nextPage >= pages.length) return;
+
+  currentPage = nextPage;
+  renderPage();
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "ArrowRight") changePage(1);
+  if (event.key === "ArrowLeft") changePage(-1);
+});
+
+let touchStartX = 0;
+
+document.getElementById("page").addEventListener("touchstart", function(event) {
+  touchStartX = event.changedTouches[0].screenX;
+}, { passive: true });
+
+document.getElementById("page").addEventListener("touchend", function(event) {
+  const touchEndX = event.changedTouches[0].screenX;
+  const difference = touchEndX - touchStartX;
+
+  if (Math.abs(difference) > 70) {
+    changePage(difference < 0 ? 1 : -1);
+  }
+}, { passive: true });
+
+renderPage();
+</script>
+
+</body>
+</html>
